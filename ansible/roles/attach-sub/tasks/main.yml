@@ -1,0 +1,9 @@
+---
+
+- name: Inclure les taches d'attachement a la souscription par satellite
+  include: task-attach-sub-sat.yml
+  when: var_sat == 'enabled'
+
+- name: Inclure les taches d'attachement a la souscription
+  include: task-attach-sub.yml
+  when: var_sat == 'disabled'

@@ -7,7 +7,7 @@
   tasks:
     - wait_for_connection:
         delay: 15
-        timeout: 180  
+        timeout: 180
     #- wait_for:
     #    port: 22
     #    host: '{{ (ansible_ssh_host|default(ansible_host))|default(inventory_hostname) }}'
@@ -20,5 +20,7 @@
   gather_facts: yes
 
   tasks:
+  - import_role:
+      name: attach-sub
   - import_role:
       name: go-build

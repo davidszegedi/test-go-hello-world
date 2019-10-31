@@ -1,0 +1,31 @@
+---
+
+    - name: Ansible delete file glob
+      find:
+        paths: /etc/yum.repos.d
+        patterns: '([\s\S]*?)(redhat\.repo)'
+      register: files_to_delete
+
+    - name: Ansible remove file glob
+      file:
+        path: "{{ item.path }}"
+        state: absent
+      with_items: "{{ files_to_delete.files }}"
+
+    - name: Installer l'agent Katello
+      yum:
+        disable_gpg_check: yes
+        name: "{{ katello_path }}"
+        state: present
+
+    - name: Desenregistrement de la souscription
+      redhat_subscription:
+        state: absent
+      ignore_errors: True
+
+    - name: Enregistrement a Satellite avec la cle d'activation
+      redhat_subscription:
+        state: present
+        activationkey: "{{ var_activationkey }}"
+        org_id: "{{ var_org_id }}"
+      ignore_errors: True

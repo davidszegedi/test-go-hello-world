@@ -1,0 +1,20 @@
+---
+    - name: Ansible remove file
+      file:
+        path: "/etc/yum.repos.d/rhel.repo"
+        state: absent
+
+    - name: Ansible remove file
+      file:
+        path: "/etc/yum.repos.d/redhat.repo"
+        state: absent
+
+    - name: Enregistrement a access red hat avec la cle d'activation
+      redhat_subscription:
+        state: present
+        activationkey: "{{ var_activationkey }}"
+        org_id: "{{  var_org_id }}"
+      ignore_errors: True
+
+    - name: Desactivation repo
+      shell: "subscription-manager repos --disable=rhel-7-server-htb-rpms"
