@@ -1,12 +1,12 @@
 - name: Install Golang
-  dnf:
+  yum:
     name:
       - golang
     state: latest
   become: true
-  
+
 - name: Install selinux python bindings
-  dnf:
+  yum:
     name:
       - libselinux-python
     state: latest
@@ -43,7 +43,7 @@
     GOPATH: "{{ ansible_env.HOME }}/go"
     GOBIN: "{{ ansible_env.HOME }}"
   args:
-    chdir: "{{ ansible_env.HOME }}/go/src/{{ repo_name }}" 
+    chdir: "{{ ansible_env.HOME }}/go/src/{{ repo_name }}"
   when: install_dep.rc == 0
   register: install_go_dependencies
 
