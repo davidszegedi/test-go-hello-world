@@ -1,6 +1,7 @@
 - name: Install epel repo
   shell: sudo yum -y install wget; wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm; sudo yum -y install epel-release-latest-7.noarch.rpm
   become: true
+  ignore_errors: yes
 
 - name: Install Golang
   yum:
