@@ -1,16 +1,16 @@
-#- name: Install epel repo
-#  shell: sudo yum -y install wget; wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm; sudo yum -y install epel-release-latest-7.noarch.rpm
-#  become: true
+- name: Install epel repo
+  shell: sudo yum -y install wget; wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm; sudo yum -y install epel-release-latest-7.noarch.rpm
+  become: true
 
 - name: Install Golang
-  dnf:
+  yum:
     name:
       - golang
     state: latest
   become: true
 
 - name: Install selinux python bindings
-  dnf:
+  yum:
     name:
       - libselinux-python
     state: latest
